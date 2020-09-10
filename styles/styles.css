@@ -1,0 +1,164 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+@font-face {
+  font-family: phoenix;
+  src: url("HARRYP__.TTF");
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background: url("../img/diagon.png");
+}
+h1,
+h3 {
+  font-family: phoenix;
+}
+h1 {
+  font-size: 60px;
+  margin-top: 30px;
+  color: yellow;
+}
+h1 img {
+  height: 60px;
+}
+h3 {
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+#card-deck {
+  width: 0px;
+  height: 0px;
+  display: grid;
+  border-radius: 10px;
+  margin-top: 2em;
+  justify-content: center;
+  grid-template-columns: repeat(2, 40vw);
+  gap: 30px;
+  background-color: #ffffff99;
+  overflow-y: auto;
+  transition: height 1.2s, width 0.9s 1.2s;
+}
+
+@media screen and (min-width: 768px){
+  #card-deck {
+    grid-template-columns: repeat(4, 20vw);
+  }
+}
+
+.btn {
+  background-color: #ffffff99;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 150px;
+  border-radius: 50%;
+  animation: 2s glow alternate infinite;
+  transition: background 0.7s;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #ffffff;
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: -0px -0px 100px 20px #a1803b;
+  }
+  100% {
+    box-shadow: -0px -0px 1px 1px #a1803b;
+  }
+}
+
+/* Fondo de la card segun la casa del personaje */
+.Gryffindor {
+  background: linear-gradient(
+    -45deg,
+    #ffc40099,
+    #7f090999,
+    #ffc40099,
+    #7f090999
+  );
+}
+.Slytherin {
+  background: linear-gradient(
+    -45deg,
+    #0d621799,
+    #aaaaaa99,
+    #0d621799,
+    #aaaaaa99
+  );
+}
+.Hufflepuff {
+  background: linear-gradient(
+    -45deg,
+    #eee11799,
+    #00000099,
+    #eee11799,
+    #00000099
+  );
+}
+.Ravenclaw {
+  background: linear-gradient(
+    -45deg,
+    #000a9099,
+    #946b2d99,
+    #000a9099,
+    #946b2d99
+  );
+}
+.houseless {
+  background-color: #5b76ec99;
+}
+
+/*  Estilos generales de card.
+    Para poder definir el background-size, primero tiene que haber un background definido.
+    Es por eso que primero se definieron los estilos de las casas */
+.card {
+  height: 45vh;
+  border-radius: 25px;
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  background-size: 400%;
+  transition: box-shadow 0.6s, background 0.8s;
+}
+
+.avatar {
+  max-width: 80%;
+  max-height: 40vh;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.card img {
+  transition: transform 1.2s;
+  width: 100%;
+}
+
+.card ul {
+  list-style: none;
+}
+.card li {
+  margin: 0.5em 0;
+  font-size: 18px;
+}
+
+.card:hover {
+  box-shadow: -1px 3px 20px rgb(128, 128, 128);
+  background-position: 100%;
+}
+
+.card:hover img {
+  transform: scale(1.1);
+}
