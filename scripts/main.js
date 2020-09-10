@@ -52,7 +52,7 @@ let personajes=[];
 // Declaro una función asíncrona para cargar los datos del fetch y llamo a la función
 // que los dibuja en el DOM.
 async function getData(){
-  const res = await fetch("http://hp-api.herokuapp.com/api/characters");
+  const res = await fetch("https://hp-api.herokuapp.com/api/characters");
   personajes = await res.json();
   llenar()
 }
