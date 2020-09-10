@@ -1,13 +1,28 @@
-
+// Referencio al <div> contenedor y al botón del .html .
 const deck = document.getElementById("card-deck");
 const boton = document.getElementById("boton");
+// Añado un escuchador de eventos en el botón.
+// Al hacer clic en él, se va a ejecutar la funcion mostrar() .
 boton.addEventListener('click',mostrar);
 
+// Declaro la variable personajes donde se guardará el array del fetch.
+let personajes=[];
+
+// Declaro una función asíncrona para cargar los datos del fetch 
+// y llamar a la función que los dibuja en el DOM.
+async function getData(){
+  // JS espera que se resuelva la Promesa del fetch, y luego guarda el resultado en res .
+  const res = await fetch("https://hp-api.herokuapp.com/api/characters");
+  // JS espera que se resuelva la Promesa de la funcion json(), y luego guarda el resultado en personajes .
+  personajes = await res.json();
+  // Luego de guardar los datos en personajes, llamo a la funcion llenar() .
+  llenar()
+}
 
 // Declaro una función para atrapar los errores del fetch.
 // Se le pasa una función como argumento
 function catchErrors(fn) {
-  //Devolvemos uua nueva función.
+  //Devolvemos una nueva función.
   // Los ...args me permiten pasar argumentos desde la llamada de funcionComprobada(args)
   return function(...args){
     //Devolvemos una función que corre fn() y le agregamos el catch
@@ -18,7 +33,8 @@ function catchErrors(fn) {
 }
 
 // Declaramos una nueva función donde pasamos como argumento nuestra funcion asíncrona.
-/* En este caso, cuando la computadora la ejecute, "funcionComprobada" va a tener esta estructura:
+// En este caso, cuando la computadora la ejecute, "funcionComprobada" va a tener esta estructura:
+/* 
 function funcionComprobada(...args){
    return getData(...args).catch((error) => {
      alert(`UPS... se produjo un error \n${error}`)
@@ -39,30 +55,19 @@ function mostrar(){
   deck.style.height = "67vh";
 
   // Añado un eventListener para cuando termina la transición del alto.
+  // Luego de este evento, llamo a la función que engloba tanto al fetch como al catch.
   deck.addEventListener("transitionend", e=>{
     e.target===deck && e.propertyName=="height" ? funcionComprobada() : null ;
   });
 }
 
 
-
-// Declaro la variable personajes donde se guardará el array del fetch.
-let personajes=[];
-
-// Declaro una función asíncrona para cargar los datos del fetch y llamo a la función
-// que los dibuja en el DOM.
-async function getData(){
-  const res = await fetch("https://hp-api.herokuapp.com/api/characters");
-  personajes = await res.json();
-  llenar()
-}
-
-
-
-
-async function llenar() {
-  // Vacío el contenido del .deck
+function llenar() {
+  // Vacío el contenido del .deck .
+  // Esto me va a permitir en un futuro poder aplicar filtros y mostrar
+  // sólo los personajes deseados de, por ejemplo, una determinada casa.
   deck.innerHTML='';
+
   // Por cada personaje...
   personajes.forEach(personaje => {
     // ... genero una card.
