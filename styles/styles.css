@@ -52,6 +52,16 @@ h3 {
   }
 }
 
+#card-deck.loading{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#loader{
+  display: none;
+}
+
 .btn {
   background-color: #ffffff99;
   position: absolute;

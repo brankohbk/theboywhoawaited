@@ -1,6 +1,7 @@
 // Referencio al <div> contenedor y al botón del .html .
 const deck = document.getElementById("card-deck");
 const boton = document.getElementById("boton");
+const loader = document.getElementById("loader");
 // Añado un escuchador de eventos en el botón.
 // Al hacer clic en él, se va a ejecutar la funcion mostrar() .
 boton.addEventListener('click',mostrar);
@@ -49,7 +50,7 @@ function mostrar(){
 
   // Defino las dimensiones que tendrá el mazo (deck).
   // Inicialmente, en el CSS están definidas en 0px.
-  // Como tienen transiciones, la aparición en el navegador será "armoniosa" (o eso se buscó).
+  // Como tienen transiciones, la aparición en el navegador será "armoniosa".
   deck.style.padding = "40px";
   deck.style.width = "90%";
   deck.style.height = "67vh";
@@ -57,7 +58,7 @@ function mostrar(){
   // Añado un eventListener para cuando termina la transición del alto.
   // Luego de este evento, llamo a la función que engloba tanto al fetch como al catch.
   deck.addEventListener("transitionend", e=>{
-    e.target===deck && e.propertyName=="height" ? funcionComprobada() : null ;
+    e.target===deck && e.propertyName=="height" ? (loader.style.display="block", funcionComprobada() ): null ;
   });
 }
 
@@ -67,6 +68,7 @@ function llenar() {
   // Esto me va a permitir en un futuro poder aplicar filtros y mostrar
   // sólo los personajes deseados de, por ejemplo, una determinada casa.
   deck.innerHTML='';
+  deck.classList.remove("loading")
 
   // Por cada personaje...
   personajes.forEach(personaje => {
